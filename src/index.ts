@@ -161,42 +161,24 @@ export const publish = eventAggregator.publish.bind(eventAggregator);
 
 import { Mixin } from "vue-mixin-decorator";
 import { VueClass } from "vue-class-component/lib/declarations";
-// @Mixin
-// export default class EventAggregatorMixin extends Vue implements IEventAggregatorMixin {
-//   private subscriptions: Subscription[] = [];
-//   subscribe(event: string, callback: EventCallback): Subscription {
-//     let subscription = eventAggregator.subscribe(event, callback);
-//     this.subscriptions.push(subscription);
-//     return subscription;
-//   }
-//   subscribeOnce(event: string, callback: EventCallback): Subscription {
-//     let subscription = eventAggregator.subscribeOnce(event, callback);
-//     this.subscriptions.push(subscription);
-//     return subscription;
-//   }
-//   publish(event: string, data: any) {
-//     eventAggregator.publish(event, data);
-//   }
-//   destroyed() {
-//     this.subscriptions.forEach(s => s.dispose());
-//   }
-// }
 
 export declare type MixinFunction<
   T1 extends VueClass<any> = VueClass<any>,
   T2 extends VueClass<Vue> = VueClass<Vue>
 > = (superClass: T2) => VueClass<T1 & T2>;
 
-export interface IEventAggregatorMixin extends VueClass<Vue> {
-  new (): IEventAggregatorMixin & VueClass<Vue>;
+export interface EventAggregatorMixin extends VueClass<Vue> {
+  new (...args: any[]): IEventAggregatorMixin & VueClass<Vue>;
 }
-export interface EventAggregatorMixin extends VueClass<Vue> {}
 export interface EventAggregatorConstructor extends VueClass<Vue> {
-  new (...args: any[]): EventAggregatorMixin & VueClass<Vue>;
+  new (...args: any[]): VueClass<Vue>;
+  subscribe: (event: string, callback: EventCallback) => Subscription;
+  subscribeOnce: (event: string, callback: EventCallback) => Subscription;
+  publish: (event: string, data?: any) => void;
 }
 export type EventAggregatorFunction = MixinFunction<EventAggregatorConstructor>;
 
-export const EventAggregatorMixin: EventAggregatorFunction = (superClass: VueClass<Vue>) => {
+export const EventAggregator: EventAggregatorFunction = (superClass: VueClass<Vue>) => {
   @Mixin
   class EventAggregatorMixinClass extends superClass {
     private subscriptions: Subscription[] = [];
@@ -219,5 +201,3 @@ export const EventAggregatorMixin: EventAggregatorFunction = (superClass: VueCla
   }
   return <any>EventAggregatorMixinClass;
 };
-
-export const EventAggregator: EventAggregatorFunction = EventAggregatorMixin;

@@ -1,4 +1,6 @@
 import Vue from "vue";
+import { Mixin } from "vue-mixin-decorator";
+import { VueClass } from "vue-class-component/lib/declarations";
 
 export type EventCallback = (data?: any, event?: string) => void;
 export interface Subscription {
@@ -158,9 +160,6 @@ const includeEventsIn = (obj: any) => {
 export const subscribe = eventAggregator.subscribe.bind(eventAggregator);
 export const subscribeOnce = eventAggregator.subscribeOnce.bind(eventAggregator);
 export const publish = eventAggregator.publish.bind(eventAggregator);
-
-import { Mixin } from "vue-mixin-decorator";
-import { VueClass } from "vue-class-component/lib/declarations";
 
 export declare type MixinFunction<
   T1 extends VueClass<any> = VueClass<any>,

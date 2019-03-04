@@ -1,0 +1,15 @@
+node_modules/
+.idea/
+dist/
+dev/
+src/**/*.js
+src/**/*.js.map
+test/**/*.js
+test/**/*.js.map
+!test/unit/setup.js
+!test/unit/tests.loader.js
+demo/**/*.js
+demo/**/*.js.map
+mochawesome-report/
+package-lock.json
+.DS_Store

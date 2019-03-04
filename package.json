@@ -1,0 +1,59 @@
+{
+  "name": "@uxland/uxl-event-aggregator-vue",
+  "version": "0.0.0-development",
+  "description": "UXLand event-aggregator-vue",
+  "homepage": "https://github.com/uxland/uxl-event-aggregator-vue#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uxland/uxl-event-aggregator-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uxland/uxl-event-aggregator-vue/issues"
+  },
+  "author": "UXLand <dev@uxland.es> (http://www.uxland.es)",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "keywords": [
+    "vue"
+  ],
+  "devDependencies": {
+    "@types/ramda": "^0.25.51",
+    "@vue/cli-plugin-typescript": "^3.4.1",
+    "@vue/cli-service": "^3.4.1",
+    "semantic-release": "^15.13.3",
+    "travis-deploy-once": "^5.0.11",
+    "tslib": "^1.9.3",
+    "typescript": "^3.3.3333",
+    "vue-property-decorator": "^7.3.0",
+    "vue-template-compiler": "^2.6.8"
+  },
+  "dependencies": {
+    "ramda": "^0.26.1",
+    "vue": "^2.6.8",
+    "vue-mixin-decorator": "^1.1.0"
+  },
+  "scripts": {
+    "test:ui:watch": "nodemon --watch test --watch src -x \"polymer test --config-file wct.config.json\"",
+    "test:ui": "polymer test --config-file wct.config.json",
+    "test:unit": "node --experimental-modules node_modules/mocha/bin/_mocha -r esm ./test/unit/setup.js --ui tdd --reporter mochawesome test/unit/**/*.loader.js",
+    "tdd": "node --experimental-modules node_modules/mocha/bin/_mocha --watch -r esm ./test/unit/setup.js --ui tdd --reporter mochawesome test/unit/**/*.loader.js",
+    "build:es": "tsc -p tsconfig-es.json",
+    "build:cjs": "tsc -p tsconfig-cjs.json",
+    "build": "npm run build:es",
+    "dist": "npm run build",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release",
+    "serve": "vue-cli-service serve demo/main.ts"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branch": "master"
+  }
+}
